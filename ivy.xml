@@ -1,0 +1,9 @@
+<ivy-module version="2.0">
+    <info organisation="com.matthiasdenu" module="jacoco-bug"/>
+    <dependencies>
+        <dependency org="junit" name="junit" rev="4.13.2"/>
+        <dependency org="org.jacoco" name="org.jacoco.ant" rev="0.8.7"/>
+        <dependency org="org.apache.ant" name="ant" rev="1.10.11"/>
+        <dependency org="org.apache.ant" name="ant-junit" rev="1.10.11"/>
+    </dependencies>
+</ivy-module>
