@@ -14,8 +14,13 @@
 
     <target name="build" depends="ivy" description="--> compile and build this test project"> 
         <mkdir dir="out/classes" />
-        <javac classpath="lib" destdir="out" includeantruntime="false"> 
-            <!-- <src path="src"/> -->
+
+        <path id="classpath">
+            <fileset dir="lib" includes="*.jar"/>
+        </path>
+
+        <javac classpathref="classpath" destdir="out/classes" includeantruntime="false">
+            <src path="src"/>
             <src path="test"/>
         </javac>
     </target>
