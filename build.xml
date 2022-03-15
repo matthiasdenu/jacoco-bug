@@ -44,8 +44,8 @@
 
     <target name="test" depends="build" description="--> test the program">
         <mkdir dir="out/test/results" />
-        <jacoco:coverage enabled="false">
-            <junit>
+        <jacoco:coverage enabled="true" destfile="out/test/jacoco.exec">
+            <junit fork="yes">
                 <classpath refid="classpath"/>
                 <test name="TestSuite" todir="out/test/results"/>
                 <test name="CalculatorTest" todir="out/test/results"/>

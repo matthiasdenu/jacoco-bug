@@ -1,3 +1,4 @@
+import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -6,5 +7,6 @@ import org.junit.runners.Suite;
         TestClass.class
 })
 public class TestSuite {
-  // TODO
+  @ClassRule
+  public static InitializeConfigStuff initializeConfigStuff = new InitializeConfigStuff();
 }
