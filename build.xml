@@ -4,6 +4,23 @@
     xmlns:jacoco="antlib:org.jacoco.ant"
     default="run">
 
+    <path id="classpath">
+        <fileset dir="lib/" includes="*.jar"/>
+        <fileset dir="build/ivy" includes="*.jar" />
+    </path>
+
+    <taskdef uri="antlib:org.jacoco.ant"
+      resource="org/jacoco/ant/antlib.xml"
+      classpathref="classpath"/>
+
+    <taskdef uri="antlib:org.apache.ivy.ant"
+      resource="org/apache/ivy/ant/antlib.xml"
+      classpathref="classpath"/>
+
+    <taskdef name="junit"
+      classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask"
+      classpathref="classpath"/>
+
     <target name="ivy" description="--> retrieve dependencies with ivy">
         <ivy:retrieve />
     </target>
@@ -14,14 +31,9 @@
 
     <target name="build" depends="ivy" description="--> compile and build this test project"> 
         <mkdir dir="out/classes" />
-
-        <path id="classpath">
-            <fileset dir="lib" includes="*.jar"/>
-        </path>
-
-        <javac classpathref="classpath" destdir="out/classes" includeantruntime="false">
-            <src path="src"/>
-            <src path="test"/>
+        <javac classpathref="classpath" destdir="out/classes" includes="*.java" includeantruntime="false">
+            <src path="src/"/>
+            <src path="test/"/>
         </javac>
     </target>
 
@@ -30,11 +42,10 @@
     </target>
 
     <target name="test" depends="build" description="--> test the program">
-        <mkidr dir="out/test/results" /> 
+        <mkdir dir="out/test/results" />
         <jacoco:coverage enabled="false">
             <junit>
-                <test name="TestSuite" todir="${build.tests.results}"/>
-
+                <test name="TestSuite" todir="out/test/results"/>
             </junit>
         </jacoco:coverage>
     </target>
