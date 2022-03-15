@@ -6,7 +6,8 @@
 
     <path id="classpath">
         <fileset dir="lib/" includes="*.jar"/>
-        <fileset dir="build/ivy" includes="*.jar" />
+        <fileset dir="build/ivy/" includes="*.jar" />
+        <pathelement location="out/classes"/>
     </path>
 
     <taskdef uri="antlib:org.jacoco.ant"
@@ -38,19 +39,18 @@
     </target>
 
     <target name="run" depends="build" description="--> run the program"> 
-        <java classpath="./out" classname="HelloWorld" />
+        <java classpath="out/classes" classname="HelloWorld" />
     </target>
 
     <target name="test" depends="build" description="--> test the program">
         <mkdir dir="out/test/results" />
         <jacoco:coverage enabled="false">
             <junit>
+                <classpath refid="classpath"/>
                 <test name="TestSuite" todir="out/test/results"/>
+                <test name="CalculatorTest" todir="out/test/results"/>
+                <formatter type="plain"/>
             </junit>
         </jacoco:coverage>
     </target>
-
-    <target name="make-dir" description="test test test"> 
-            <mkdir dir="out/test/results"/> 
-    </target> 
 </project>
